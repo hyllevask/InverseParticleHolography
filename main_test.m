@@ -17,10 +17,28 @@ z0 = 20000; %Length from image-plane to start of reconstruction;
 dz = 10*pp;
 Nz = 100;   %Number of reconstruction planes.
 
+key = {'lambda','pp','N','z0','dz','Nz'};
+values  = [lambda,pp,N,z0,dz,Nz];
 
+DomainVar = containers.Map(key,values)
+OpimizationVar = [];    %TODO: Implement optimization 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Read hologram
 filepath = 'test_holo.bmp'
+hologram = readHolo(filepath,'inline');  
 
-hologram = readholo(filepath,'inline');  %TODO: implement readholo wiht keywords inline/off-axis
+
+Volume = Solve_Inverse(hologram,DomainVar,OpimizationVar); %TODO: Implement function
+
+
+
+
+
+
 
 
 
